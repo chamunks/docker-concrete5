@@ -1,9 +1,8 @@
 #!/bin/sh
-cd /tmp
-unzip -n -q /tmp/concrete5.zip
-mv /tmp/concrete5-*/* /var/www/html/
+unzip -n -q /var/www/concrete5.zip
+mv /var/www/concrete5*/* /var/www/html/
 chown -R www-data:www-data /var/www/html/*
-rm -rf /tmp/concrete5*
+rm -rf /var/www/concrete5*
 rm -rf /var/www/html/index.html
 rm -rf /var/www/html/updates
 chown -R www-data:www-data /var/www/html/files
