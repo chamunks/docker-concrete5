@@ -5,7 +5,7 @@ FROM debian:stretch-slim
 RUN apt-get update
 
 # Install nginx, php-fpm and supervisord from ubuntu repository
-RUN apt-get install -y wget unzip vim nginx php7.0-fpm supervisor && \
+RUN apt-get install -y wget unzip vim nginx php7.0-fpm php7.0-mysql php7.0-gd php7.0-mcrypt php7.0-xml php7.0-mbstring php7.0-zip supervisor && \
     rm -rf /var/lib/apt/lists/*
 
 #Define the ENV variable
@@ -21,6 +21,8 @@ RUN sed -i -e 's/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/g' ${php_conf} && \
 
 #Copy supervisor configuration
 COPY supervisord.conf ${supervisor_conf}
+
+RUN wget -q https://www.concrete5.org/download_file/-/view/99963/ -O /tmp/concrete5-8.3.1.zip
 
 RUN mkdir -p /run/php && \
     chown -R www-data:www-data /var/www/html && \
