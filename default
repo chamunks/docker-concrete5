@@ -3,12 +3,12 @@ server {
     listen [::]:80 default_server;
 
     root /var/www/html;
-    index index.html index.htm index.nginx-debian.html;
+    index index.html index.htm index.php;
 
     server_name _;
 
     location / {
-        try_files $uri $uri/ /index.php =404;
+        try_files $uri $uri/ index.php =404;
     }
 
     location ~ \.php$ {
