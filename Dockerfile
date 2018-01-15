@@ -31,7 +31,7 @@ VOLUME ["/etc/nginx/sites-enabled", "/etc/nginx/conf.d", "/var/log/nginx", "/var
 
 # Configure Services and Port
 COPY start.sh /start.sh
-RUN [“chmod”, “+x”, "/start.sh”]
+RUN ["chmod", "+x", "/start.sh"]
 CMD ["./start.sh"]
 
 #EXPOSE 80
