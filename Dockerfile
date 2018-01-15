@@ -5,7 +5,7 @@ FROM debian:stretch-slim
 RUN apt-get update
 
 # Install nginx, php-fpm and supervisord from ubuntu repository
-RUN apt-get install -y wget vim nginx php7.0-fpm supervisor && \
+RUN apt-get install -y wget unzip vim nginx php7.0-fpm supervisor && \
     rm -rf /var/lib/apt/lists/*
 
 #Define the ENV variable
