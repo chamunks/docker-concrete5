@@ -1,13 +1,12 @@
-#Download base image ubuntu 16.04
 FROM debian:stretch-slim
 
 RUN apt-get update
-RUN apt-get install -y wget unzip vim nginx php7.0-fpm php7.0-mysql php7.0-gd php7.0-mcrypt php7.0-xml php7.0-mbstring php7.0-zip supervisor && \
+RUN apt-get install -y wget unzip vim nginx php5.6-fpm php5.6-mysql php5.6-gd php5.6-mcrypt php5.6-xml php5.6-mbstring php5.6-zip supervisor && \
     rm -rf /var/lib/apt/lists/*
 
 ENV nginx_vhost /etc/nginx/sites-available/default
-ENV php_ini /etc/php/7.0/fpm/php.ini
-ENV php_conf /etc/php/7.0/fpm/pool.d/www.conf
+ENV php_ini /etc/php/5.6/fpm/php.ini
+ENV php_conf /etc/php/5.6/fpm/pool.d/www.conf
 ENV nginx_conf /etc/nginx/nginx.conf
 ENV supervisor_conf /etc/supervisor/supervisord.conf
 
