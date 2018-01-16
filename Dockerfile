@@ -1,4 +1,3 @@
-#Download base image ubuntu 16.04
 FROM debian:stretch-slim
 
 RUN apt-get update
