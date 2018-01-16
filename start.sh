@@ -5,7 +5,6 @@ if [ ! -f /var/www/html/application/config/database.php ];then
 	fi
 	cd /var/www/
 	unzip -n -q /var/www/concrete5.zip
-	mv /var/www/concrete5*/* /var/www/html/
 	mv /var/www/concrete5*/composer.* /var/www/html/
 	mv /var/www/concrete5*/index.php /var/www/html/
 	mv /var/www/concrete5*/concrete /var/www/html/
