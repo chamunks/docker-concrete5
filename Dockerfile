@@ -20,12 +20,13 @@ RUN sed -i -e 's/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/g' ${php_ini} && \
 COPY supervisord.conf ${supervisor_conf}
 
 RUN wget -q https://www.concrete5.org/download_file/-/view/99963/ -O /var/www/concrete5.zip
+RUN unzip /var/www/concrete5.zip -d /var/www/
 
 RUN mkdir -p /run/php && \
     chown -R www-data:www-data /var/www/html && \
     chown -R www-data:www-data /run/php
 
-VOLUME ["/etc/nginx/sites-enabled", "/etc/nginx/conf.d", "/var/log/nginx", "/var/www/html"]
+VOLUME ["/var/log/nginx", "/var/www/html"]
 
 COPY start.sh /start.sh
 RUN ["chmod", "+x", "/start.sh"]
