@@ -11,7 +11,7 @@ if [ ! -f /var/www/html/application/config/database.php ] ;then
 fi
 rm -rf /var/www/html/index*.html
 chown -R www-data:www-data /var/www/html/*
-chmod 777 /var/www/html/files
+chmod -R 777 /var/www/html/files
 
 /usr/bin/supervisord -n -c /etc/supervisor/supervisord.conf
 
