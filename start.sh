@@ -1,10 +1,12 @@
 #!/bin/sh
+rm -rf /var/www/html/index*.html > /dev/null 2>&1
+
 if [ ! -d /var/www/html/application/config ] ;then
 	cp -rf /var/www/html/application-orig/* /var/www/html/application/
 fi
-rm -rf /var/www/html/index*.html > /dev/null 2>&1
-chown -R www-data:www-data /var/www/html/*
-chmod -R 777 /var/www/html/files
+
+chown -R www-data:www-data /var/www/html/application/files*
+chmod -R 777 /var/www/html/application/files
 
 /usr/bin/supervisord -n -c /etc/supervisor/supervisord.conf
 
