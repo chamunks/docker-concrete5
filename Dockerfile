@@ -22,11 +22,19 @@ COPY supervisord.conf ${supervisor_conf}
 RUN wget -q https://www.concrete5.org/download_file/-/view/99963/ -O /var/www/concrete5.zip
 RUN unzip /var/www/concrete5.zip -d /var/www/
 
+RUN mv /var/www/concrete5*/composer.* /var/www/html/
+RUN mv /var/www/concrete5*/index.php /var/www/html/
+RUN mv /var/www/concrete5*/concrete /var/www/html/
+RUN mv /var/www/concrete5*/application /var/www/html/application-dist
+
+RUN mkdir /var/www/html/packages
+RUN mkdir /var/www/html/application
+
 RUN mkdir -p /run/php && \
     chown -R www-data:www-data /var/www/html && \
     chown -R www-data:www-data /run/php
 
-VOLUME ["/var/log/nginx", "/var/www/html"]
+VOLUME ["/var/log/nginx", "/var/www/html/packages", "/var/www/html/application"]
 
 COPY start.sh /start.sh
 RUN ["chmod", "+x", "/start.sh"]
