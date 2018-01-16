@@ -27,8 +27,8 @@ RUN mv /var/www/concrete5*/index.php /var/www/html/
 RUN mv /var/www/concrete5*/concrete /var/www/html/
 RUN mv /var/www/concrete5*/application /var/www/html/application-dist
 
-RUN mkdir /var/www/html/packages
-RUN mkdir /var/www/html/application
+RUN mkdir /var/www/html/packages;mkdir /var/www/html/application
+RUN rm -rf /var/www/concrete5*
 
 RUN mkdir -p /run/php && \
     chown -R www-data:www-data /var/www/html && \
