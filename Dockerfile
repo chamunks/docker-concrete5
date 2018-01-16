@@ -1,7 +1,7 @@
-FROM debian:stretch-slim
+FROM debian:jessie-slim
 
 RUN apt-get update
-RUN apt-get install -y wget unzip vim nginx php5.6-fpm php5.6-mysql php5.6-gd php5.6-mcrypt php5.6-xml php5.6-mbstring php5.6-zip supervisor && \
+RUN apt-get install -y wget unzip vim nginx php5-fpm php5-mysql php5-gd php5-mcrypt supervisor && \
     rm -rf /var/lib/apt/lists/*
 
 ENV nginx_vhost /etc/nginx/sites-available/default
