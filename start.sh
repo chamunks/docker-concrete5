@@ -9,12 +9,17 @@ if [ ! -f /var/www/html/application/config/database.php ];then
 	mv /var/www/concrete5*/index.php /var/www/html/
 	mv /var/www/concrete5*/concrete /var/www/html/
 	mv /var/www/concrete5*/application /var/www/html/application-orig
-	if [ ! -d /var/www/html/application/config ] ;then
-		cp -rf /var/www/html/application-orig/* /var/www/html/application/
-	fi
+	
 	if [ ! -d /var/www/html/packages ];then
 		mkdir var/www/html/packages
 	fi
+	if [ ! -d /var/www/html/application ];then
+		mkdir var/www/html/application
+	fi	
+	if [ ! -d /var/www/html/application/config ] ;then
+		cp -rf /var/www/html/application-orig/* /var/www/html/application/
+	fi
+	
 	rm -rf /var/www/concrete5*
 	rm -rf /var/www/html/updates
 fi
