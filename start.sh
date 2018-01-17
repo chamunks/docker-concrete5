@@ -9,5 +9,8 @@ chown -R www-data:www-data /var/www/html/application
 chown -R www-data:www-data /var/www/html/packages
 chmod 775 /var/www/html/application/files
 
+mkdir /var/www/html/updates
+ln -s /var/www/html /var/www/html/updates/concrete5-8.3.1
+
 /usr/bin/supervisord -n -c /etc/supervisor/supervisord.conf
 
