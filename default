@@ -6,14 +6,18 @@ server {
     index index.html index.htm index.php;
 
     server_name _;
+    
+    rewrite ^/sitemap_index\.xml$ /index.php?sitemap=1 last;
+    rewrite ^/([^/]+?)-sitemap([0-9]+)?\.xml$ /index.php?sitemap=$1&sitemap_n=$2 last;
+
 
     location / {
 	if (!-f $request_filename){ set $rule_0 1$rule_0; }
 	if (!-d $request_filename){ set $rule_0 2$rule_0; }
 	if ($rule_0 = "21"){ rewrite ^/(.*)$ /index.php/$1 last; }
 	try_files $uri $uri/ /index.php?q=$uri&$args;
-	}
-
+    }
+    
     location ~\.php($|/) {
 	fastcgi_split_path_info ^(.+\.php)(/.+)$;
         include snippets/fastcgi-php.conf;
