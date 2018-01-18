@@ -1,4 +1,5 @@
 #!/bin/sh
+mkdir /run/haproxy
 
 if [ ! -d /var/www/html/config ];then
 	cp -nr /var/www/concrete5.6.3.5/* /var/www/html/
