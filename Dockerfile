@@ -25,7 +25,7 @@ COPY supervisord.conf ${supervisor_conf}
 RUN wget -q https://www.concrete5.org/download_file/-/view/96083/8497/ -O /var/www/concrete5.zip
 RUN unzip /var/www/concrete5.zip -d /var/www/
 
-RUN mkdir -p /run/php && \
+RUN mkdir -p /run/php && mkdir -p /run/haproxy && \
     chown -R www-data:www-data /var/www/html && \
     chown -R www-data:www-data /run/php
 
