@@ -15,7 +15,7 @@ COPY php.ini ${php_ini}
 COPY php.conf ${php_conf}
 COPY nginx.conf ${nginx_conf}
 COPY default ${nginx_vhost}
-COPY haproxy.cfg $(haproxy_cfg)
+COPY haproxy.cfg ${haproxy_cfg}
 
 RUN sed -i -e 's/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/g' ${php_ini} && \
     echo "\ndaemon off;" >> ${nginx_conf}
@@ -43,4 +43,3 @@ COPY start.sh /start.sh
 RUN ["chmod", "+x", "/start.sh"]
 CMD ["./start.sh"]
 
-#EXPOSE 80
