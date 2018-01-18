@@ -1,19 +1,22 @@
 FROM debian:jessie-slim
 
 RUN apt-get update
-RUN apt-get install -y wget unzip vim nginx php5 php5-fpm php5-gd php-pear php5-mysql dtrx supervisor && \
+RUN apt-get install -y wget unzip vim nginx php5 php5-fpm php5-gd php-pear php5-mysql dtrx haproxy supervisor && \
     rm -rf /var/lib/apt/lists/*
 
 ENV nginx_vhost /etc/nginx/sites-available/default
 ENV php_ini /etc/php5/fpm/php.ini
 ENV php_conf /etc/php5/fpm/pool.d/www.conf
 ENV nginx_conf /etc/nginx/nginx.conf
+ENV haproxy_cfg /etc/haproxy/haproxy.cfg
 ENV supervisor_conf /etc/supervisor/supervisord.conf
 
 COPY php.ini ${php_ini}
 COPY php.conf ${php_conf}
 COPY nginx.conf ${nginx_conf}
 COPY default ${nginx_vhost}
+COPY haproxy.cfg $(haproxy_cfg)
+
 RUN sed -i -e 's/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/g' ${php_ini} && \
     echo "\ndaemon off;" >> ${nginx_conf}
 
