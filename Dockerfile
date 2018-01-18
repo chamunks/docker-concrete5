@@ -30,7 +30,7 @@ RUN mkdir -p /run/php && mkdir -p /run/haproxy && \
     chown -R www-data:www-data /var/www/html && \
     chown -R www-data:www-data /run/php
 
-VOLUME ["/var/log/nginx", "/var/www/html"]
+VOLUME ["/var/www/html"]
 
 COPY start.sh /start.sh
 RUN ["chmod", "+x", "/start.sh"]
