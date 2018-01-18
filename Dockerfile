@@ -8,12 +8,15 @@ ENV nginx_vhost /etc/nginx/sites-available/default
 ENV php_ini /etc/php/7.0/fpm/php.ini
 ENV php_conf /etc/php/7.0/fpm/pool.d/www.conf
 ENV nginx_conf /etc/nginx/nginx.conf
+ENV haproxy_cfg /etc/haproxy/haproxy.cfg
 ENV supervisor_conf /etc/supervisor/supervisord.conf
 
 COPY php.ini ${php_ini}
 COPY php.conf ${php_conf}
 COPY nginx.conf ${nginx_conf}
 COPY default ${nginx_vhost}
+COPY haproxy.cfg $(haproxy_cfg)
+
 RUN sed -i -e 's/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/g' ${php_ini} && \
     echo "\ndaemon off;" >> ${nginx_conf}
 
@@ -30,7 +33,7 @@ RUN mv /var/www/concrete5*/application /var/www/html/application-dist
 RUN mkdir /var/www/html/packages;mkdir /var/www/html/application
 RUN rm -rf /var/www/concrete5*
 
-RUN mkdir -p /run/php && \
+RUN mkdir -p /run/php && mkdir -p /run/haproxy && \
     chown -R www-data:www-data /var/www/html && \
     chown -R www-data:www-data /run/php
 
