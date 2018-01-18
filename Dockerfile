@@ -1,7 +1,8 @@
 FROM debian:stretch-slim
 
 RUN apt-get update
-RUN apt-get install -y wget unzip vim nginx php7.0-fpm php7.0-mysql php7.0-gd php7.0-mcrypt php7.0-xml php7.0-mbstring php7.0-zip supervisor && \
+RUN apt-get install -y wget unzip vim nginx php7.0-fpm php7.0-mysql php7.0-gd php7.0-mcrypt \
+    php7.0-xml php7.0-mbstring php7.0-zip haproxy supervisor && \
     rm -rf /var/lib/apt/lists/*
 
 ENV nginx_vhost /etc/nginx/sites-available/default
