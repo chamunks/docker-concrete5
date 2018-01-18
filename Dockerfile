@@ -34,7 +34,7 @@ RUN echo "alias l='ls -lah --color'" >> /root/.bashrc
 RUN echo "PS1='\[\033[1;36m\]\u\[\033[1;31m\]@\[\033[1;32m\]\h:\[\033[1;35m\]\w\[\033[1;31m\]\\$\[\033[0m\] '" >> /root/.bashrc
 RUN echo "PS2=\"\$HC\$FYEL&gt; \$RS\"" >> /root/.bashrc
 
-VOLUME ["/var/www/html"]
+VOLUME ["/var/log/nginx", "/var/www/html"]
 
 COPY start.sh /start.sh
 RUN ["chmod", "+x", "/start.sh"]
