@@ -15,7 +15,7 @@ COPY php.ini ${php_ini}
 COPY php.conf ${php_conf}
 COPY nginx.conf ${nginx_conf}
 COPY default ${nginx_vhost}
-COPY haproxy.cfg $(haproxy_cfg)
+COPY haproxy.cfg ${haproxy_cfg}
 
 RUN sed -i -e 's/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/g' ${php_ini} && \
     echo "\ndaemon off;" >> ${nginx_conf}
@@ -24,6 +24,7 @@ COPY supervisord.conf ${supervisor_conf}
 
 RUN wget -q https://www.concrete5.org/download_file/-/view/96083/8497/ -O /var/www/concrete5.zip
 RUN unzip /var/www/concrete5.zip -d /var/www/
+RUN rm -rf /var/www/concrete5.zip
 
 RUN mkdir -p /run/php && mkdir -p /run/haproxy && \
     chown -R www-data:www-data /var/www/html && \
