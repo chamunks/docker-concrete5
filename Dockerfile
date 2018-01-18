@@ -22,7 +22,7 @@ RUN sed -i -e 's/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/g' ${php_ini} && \
 
 COPY supervisord.conf ${supervisor_conf}
 
-RUN wget -q https://www.concrete5.org/download_file/-/view/99963/ -O /var/www/concrete5.zip
+RUN wget -q https://www.concrete5.org/download_file/-/view/96083/8497/ -O /var/www/concrete5.zip
 RUN unzip /var/www/concrete5.zip -d /var/www/
 
 RUN mkdir -p /run/php && \
