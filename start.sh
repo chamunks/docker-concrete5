@@ -1,7 +1,7 @@
 #!/bin/sh
 
 if [ ! -d /var/www/html/config ];then
-	cp -nr /var/www/concrete5*/* /var/www/html/
+	cp -nr /var/www/concrete5.6.3.5/* /var/www/html/
 fi
 rm -rf /var/www/html/index*.html > /dev/null 2>&1
 chown -R www-data:www-data /var/www/html/*
