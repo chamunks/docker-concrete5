@@ -5,8 +5,8 @@ RUN apt-get install -y wget unzip vim nginx php5 php5-fpm php5-gd php-pear php5-
     rm -rf /var/lib/apt/lists/*
 
 ENV nginx_vhost /etc/nginx/sites-available/default
-ENV php_ini /etc/php/5.6/fpm/php.ini
-ENV php_conf /etc/php/5.6/fpm/pool.d/www.conf
+ENV php_ini /etc/php5/fpm/php.ini
+ENV php_conf /etc/php5/fpm/pool.d/www.conf
 ENV nginx_conf /etc/nginx/nginx.conf
 ENV supervisor_conf /etc/supervisor/supervisord.conf
 
