@@ -17,6 +17,10 @@ server {
 		deny            all;
 		access_log      off;
 	} 
+	
+	location = /favicon.ico { log_not_found off; access_log off; }
+	location = /robots.txt { allow all; log_not_found off; access_log off; }
+	location ~ /\. { deny all; access_log off; log_not_found off; } 
 
         map $sent_http_content_type $expires {
                 default                    off;
