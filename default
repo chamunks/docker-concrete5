@@ -3,7 +3,7 @@ server {
 	listen [::]:80 default_server;
 	server_name _;
     
-	location ~ ^/health_check {
+	location /health_check {
 		stub_status     on;
 		allow           127.0.0.1;
 		allow           ::1;
