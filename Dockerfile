@@ -4,7 +4,7 @@ ENV NGINX_VERSION 1.13.8-1~stretch
 ENV NJS_VERSION   1.13.8.0.1.15-1~stretch
 
 RUN apt-get update
-RUN apt-get install -y wget unzip vim gnupg php7.0-fpm php7.0-mysql php7.0-gd php7.0-mcrypt \
+RUN apt-get install -y wget unzip vim php7.0-fpm php7.0-mysql php7.0-gd php7.0-mcrypt \
     php7.0-xml php7.0-mbstring php7.0-zip geoip-database haproxy supervisor 
 
 RUN set -x \
