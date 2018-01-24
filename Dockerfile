@@ -108,6 +108,8 @@ COPY nginx.conf ${nginx_conf}
 COPY default ${nginx_vhost}
 COPY haproxy.cfg ${haproxy_cfg}
 
+RUN rm -rf /etc/nginx/conf.d/default.conf
+
 RUN sed -i -e 's/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/g' ${php_ini} && \
     echo "\ndaemon off;" >> ${nginx_conf}
 
@@ -119,7 +121,7 @@ RUN mkdir /var/www/html &&  mv /var/www/concrete5-8.3.1/composer.* /var/www/html
 	 && mv /var/www/concrete5-8.3.1/application /var/www/html/application-dist
 
 RUN mkdir /var/www/html/packages && mkdir /var/www/html/application \
- && rm -rf /var/www/concrete5* /tmp/concrete5-8.3.1.zip
+ && rm -rf /var/www/concrete5* /tmp/concrete5-8.3.1.zip 
 
 RUN mkdir -p /run/php && mkdir -p /run/haproxy && \
     chown -R www-data:www-data /var/www/html && \
