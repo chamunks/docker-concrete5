@@ -37,8 +37,7 @@ RUN sed -i -e 's/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/g' ${php_ini} && \
 
 COPY supervisord.conf ${supervisor_conf}
 
-RUN wget -q http://demo.i-evolve.com/packages/concrete5.6.3.5.zip -O /var/www/concrete5.zip
-RUN unzip /var/www/concrete5.zip -d /var/www/
+RUN wget -q http://demo.i-evolve.com/packages/concrete5.6.3.5.zip -O /var/www/concrete5.zip && unzip /var/www/concrete5.zip -d /var/www/
 RUN rm -rf /var/www/concrete5.zip
 
 RUN mkdir -p /run/php && mkdir -p /run/haproxy && \
