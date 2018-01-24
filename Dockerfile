@@ -110,7 +110,7 @@ RUN sed -i -e 's/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/g' ${php_ini} && \
 
 COPY supervisord.conf ${supervisor_conf}
 
-RUN wget https://www.concrete5.org/download_file/-/view/99963/8497/ -O /var/www/concrete5-8.3.1.zip && unzip /var/www/concrete5-8.3.1.zip -d /var/www/
+RUN wget https://www.concrete5.org/download_file/-/view/99963/8497/ -O /tmp/concrete5-8.3.1.zip && unzip /tmp/concrete5-8.3.1.zip -d /var/www/
 
 RUN mv /var/www/concrete5*/composer.* /var/www/html/
 RUN mv /var/www/concrete5*/index.php /var/www/html/
@@ -118,7 +118,7 @@ RUN mv /var/www/concrete5*/concrete /var/www/html/
 RUN mv /var/www/concrete5*/application /var/www/html/application-dist
 
 RUN mkdir /var/www/html/packages;mkdir /var/www/html/application
-RUN rm -rf /var/www/concrete5*
+RUN rm -rf /var/www/concrete5* && /tmp/concrete5-8.3.1.zip
 
 RUN mkdir -p /run/php && mkdir -p /run/haproxy && \
     chown -R www-data:www-data /var/www/html && \
