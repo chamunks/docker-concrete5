@@ -3,7 +3,7 @@ FROM debian:jessie-slim
 ENV NGINX_VERSION 1.13.8-1~jessie
 
 RUN apt-get update
-RUN apt-get install -y wget unzip vim php5 php5-fpm php5-gd php-pear php5-mysql dtrx haproxy supervisor
+RUN apt-get install -y wget unzip vim gnupg1 apt-transport-http php5 php5-fpm php5-gd php-pear php5-mysql dtrx haproxy supervisor
 RUN apt-key adv --keyserver hkp://pgp.mit.edu:80 --recv-keys 573BFD6B3D8FBC641079A6ABABF5BD827BD9BF62 \
 	&& echo "deb http://nginx.org/packages/mainline/debian/ jessie nginx" >> /etc/apt/sources.list \
 	&& apt-get update \
@@ -52,7 +52,7 @@ RUN echo "alias l='ls -lah --color'" >> /root/.bashrc
 RUN echo "PS1='\[\033[1;36m\]\u\[\033[1;31m\]@\[\033[1;32m\]\h:\[\033[1;35m\]\w\[\033[1;31m\]\\$\[\033[0m\] '" >> /root/.bashrc
 RUN echo "PS2=\"\$HC\$FYEL&gt; \$RS\"" >> /root/.bashrc
 
-VOLUME ["/var/log/nginx", "/var/www/html"]
+VOLUME ["/var/www/html"]
 
 COPY start.sh /start.sh
 RUN ["chmod", "+x", "/start.sh"]
