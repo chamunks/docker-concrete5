@@ -1,26 +1,24 @@
 server {
 	listen 80 default_server;
 	listen [::]:80 default_server;
-
-	root /var/www/html;
-	index index.html index.htm index.php;
-
 	server_name _;
     
-	location /health_check {
+	location ~ ^/health_check {
 		stub_status     on;
 		allow           127.0.0.1;
 		allow           ::1;
-		allow		10.0.0.0/8;
-		allow		172.16.0.0/12;
-		allow		192.168.0.0/16;
 		deny            all;
 		access_log      off;
+		log_not_found   off;
 	} 
+	
+	root /var/www/html;
+	index index.html index.htm index.php;
 	
 	location = /favicon.ico { log_not_found off; access_log off; }
 	location = /robots.txt { allow all; log_not_found off; access_log off; }
 	location ~ /\. { deny all; access_log off; log_not_found off; } 
+	
 	expires $expires;
 	add_header Cache-Control public;
 	
