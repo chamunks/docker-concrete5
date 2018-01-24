@@ -6,11 +6,13 @@ ENV NJS_VERSION   1.13.8.0.1.15-1~stretch
 
 RUN apt-get update
 RUN apt-get install -y wget unzip vim php7.0-fpm php7.0-mysql php7.0-gd php7.0-mcrypt \
-    php7.0-xml php7.0-mbstring php7.0-zip geoip-database haproxy supervisor 
+    php7.0-xml php7.0-mbstring php7.0-zip geoip-database ca-certificates haproxy supervisor 
+
+RUN wget -q https://www.concrete5.org/download_file/-/view/99963/8497/ -O /tmp/concrete5-8.3.1.zip && unzip /tmp/concrete5-8.3.1.zip -d /var/www/
 
 RUN set -x \
 	&& apt-get update \
-	&& apt-get install --no-install-recommends --no-install-suggests -y gnupg1 apt-transport-https ca-certificates \
+	&& apt-get install --no-install-recommends --no-install-suggests -y gnupg1 apt-transport-https \
 	&& \
 	NGINX_GPGKEY=573BFD6B3D8FBC641079A6ABABF5BD827BD9BF62; \
 	found=''; \
@@ -111,7 +113,6 @@ RUN sed -i -e 's/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/g' ${php_ini} && \
 
 COPY supervisord.conf ${supervisor_conf}
 
-RUN wget -q --no-check-certificate https://www.concrete5.org/download_file/-/view/99963/8497/ -O /tmp/concrete5-8.3.1.zip && unzip /tmp/concrete5-8.3.1.zip -d /var/www/
 RUN mkdir /var/www/html &&  mv /var/www/concrete5-8.3.1/composer.* /var/www/html/ \
 	 && mv /var/www/concrete5-8.3.1/index.php /var/www/html/ \
 	 && mv /var/www/concrete5-8.3.1/concrete /var/www/html/ \
