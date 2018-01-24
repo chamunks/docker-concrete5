@@ -1,8 +1,25 @@
 FROM debian:jessie-slim
 
+ENV NGINX_VERSION 1.13.8-1~jessie
+
 RUN apt-get update
-RUN apt-get install -y wget unzip vim nginx php5 php5-fpm php5-gd php-pear php5-mysql dtrx haproxy supervisor && \
+RUN apt-get install -y wget unzip vim php5 php5-fpm php5-gd php-pear php5-mysql dtrx haproxy supervisor && \
     rm -rf /var/lib/apt/lists/*
+
+RUN apt-key adv --keyserver hkp://pgp.mit.edu:80 --recv-keys 573BFD6B3D8FBC641079A6ABABF5BD827BD9BF62 \
+	&& echo "deb http://nginx.org/packages/mainline/debian/ jessie nginx" >> /etc/apt/sources.list \
+	&& apt-get update \
+	&& apt-get install --no-install-recommends --no-install-suggests -y \
+						ca-certificates \
+						nginx=${NGINX_VERSION} \
+						nginx-module-xslt \
+						nginx-module-geoip \
+						nginx-module-image-filter \
+						nginx-module-perl \
+						nginx-module-njs \
+						gettext-base \
+	&& rm -rf /var/lib/apt/lists/*
+    
 
 ENV nginx_vhost /etc/nginx/sites-available/default
 ENV php_ini /etc/php5/fpm/php.ini
