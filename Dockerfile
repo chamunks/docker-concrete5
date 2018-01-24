@@ -95,7 +95,8 @@ RUN set -x \
 	
 RUN rm -rf /var/lib/apt/lists/*
 	
-ENV nginx_vhost /etc/nginx/sites-available/default
+ENV nginx_vhost /etc/nginx/sites-available/icontent.conf
+ENV nginx_default /etc/nginx/conf.d/default.conf
 ENV php_ini /etc/php/7.0/fpm/php.ini
 ENV php_conf /etc/php/7.0/fpm/pool.d/www.conf
 ENV nginx_conf /etc/nginx/nginx.conf
@@ -105,7 +106,8 @@ ENV supervisor_conf /etc/supervisor/supervisord.conf
 COPY php.ini ${php_ini}
 COPY php.conf ${php_conf}
 COPY nginx.conf ${nginx_conf}
-COPY default ${nginx_vhost}
+COPY default.conf ${nginx_default}
+COPY icontent.conf ${nginx_vhost}
 COPY haproxy.cfg ${haproxy_cfg}
 
 RUN rm -rf /etc/nginx/conf.d/default.conf
