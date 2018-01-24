@@ -1,10 +1,25 @@
 FROM debian:stretch-slim
 
-RUN apt-get update
-RUN apt-get install -y wget unzip vim nginx php7.0-fpm php7.0-mysql php7.0-gd php7.0-mcrypt \
-    php7.0-xml php7.0-mbstring php7.0-zip haproxy supervisor && \
-    rm -rf /var/lib/apt/lists/*
+ENV NGINX_VERSION 1.13.8-1~stretch
 
+RUN apt-get update
+RUN apt-get install -y wget unzip vim php7.0-fpm php7.0-mysql php7.0-gd php7.0-mcrypt \
+    php7.0-xml php7.0-mbstring php7.0-zip haproxy supervisor 
+    
+RUN apt-key adv --keyserver hkp://pgp.mit.edu:80 --recv-keys 573BFD6B3D8FBC641079A6ABABF5BD827BD9BF62 \
+	&& echo "deb http://nginx.org/packages/mainline/debian/ stretch nginx" >> /etc/apt/sources.list \
+	&& apt-get update \
+	&& apt-get install --no-install-recommends --no-install-suggests -y \
+						ca-certificates \
+						nginx=${NGINX_VERSION} \
+						nginx-module-xslt \
+						nginx-module-geoip \
+						nginx-module-image-filter \
+						nginx-module-perl \
+						nginx-module-njs \
+						gettext-base \
+	&& rm -rf /var/lib/apt/lists/*
+	
 ENV nginx_vhost /etc/nginx/sites-available/default
 ENV php_ini /etc/php/7.0/fpm/php.ini
 ENV php_conf /etc/php/7.0/fpm/pool.d/www.conf
