@@ -21,10 +21,10 @@ server {
 	location = /favicon.ico { log_not_found off; access_log off; }
 	location = /robots.txt { allow all; log_not_found off; access_log off; }
 	location ~ /\. { deny all; access_log off; log_not_found off; } 
+	expires $expires;
+	add_header Cache-Control public;
 	
 	location / {
-		expires $expires;
-		add_header Cache-Control public;
 		if (!-f $request_filename){ set $rule_0 1$rule_0; }
 		if (!-d $request_filename){ set $rule_0 2$rule_0; }
 		if ($rule_0 = "21"){ rewrite ^/(.*)$ /index.php/$1 last; }
@@ -32,8 +32,14 @@ server {
 	}
 
 	location ~\.php($|/) {
-		expires $expires;
-		add_header Cache-Control public;
+		fastcgi_buffers                 16 256k;
+		fastcgi_buffer_size             256k;
+		fastcgi_connect_timeout         2s;
+		fastcgi_send_timeout            12s;
+		fastcgi_read_timeout            360s;
+		fastcgi_busy_buffers_size       256k;
+		fastcgi_temp_file_write_size    256k;
+		fastcgi_ignore_headers          Cache-Control Expires Set-Cookie;
 		fastcgi_split_path_info ^(.+\.php)(/.+)$;
 		include snippets/fastcgi-php.conf;
 		fastcgi_pass unix:/run/php/php7.0-fpm.sock;
