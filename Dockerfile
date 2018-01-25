@@ -93,7 +93,7 @@ RUN set -x \
 		&& rm -rf "$tempDir" /etc/apt/sources.list.d/temp.list; \
 	fi
 	
-RUN rm -rf /var/lib/apt/lists/* /etc/nginx/conf.d/* /etc/nginx/sites-enabled/*
+RUN rm -rf /var/lib/apt/lists/* /etc/nginx/conf.d/* /etc/nginx/sites-enabled/* && mkdir /etc/nginx/sites-enabled
 
 ENV nginx_vhost /etc/nginx/sites-available/icontent.conf
 ENV nginx_default /etc/nginx/conf.d/default.conf
@@ -109,6 +109,8 @@ COPY nginx.conf ${nginx_conf}
 COPY default.conf ${nginx_default}
 COPY icontent.conf ${nginx_vhost}
 COPY haproxy.cfg ${haproxy_cfg}
+
+RUN ln -s /etc/nginx/sites-available/icontent.conf /etc/nginx/sites-enabled/icontent.conf
 
 RUN sed -i -e 's/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/g' ${php_ini} && \
     echo "\ndaemon off;" >> ${nginx_conf}
