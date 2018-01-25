@@ -25,8 +25,7 @@ COPY icontent.conf ${nginx_vhost}
 COPY haproxy.cfg ${haproxy_cfg}
 COPY supervisord.conf ${supervisor_conf}
 
-RUN sed -i -e 's/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/g' ${php_ini} && \
-    echo "\ndaemon off;" >> ${nginx_conf}
+RUN sed -i -e 's/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/g' ${php_ini} 
     
 RUN ln -s /etc/nginx/sites-available/icontent.conf /etc/nginx/sites-enabled/icontent.conf
 
