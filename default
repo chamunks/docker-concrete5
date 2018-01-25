@@ -13,8 +13,9 @@ server {
 	root /var/www/html;
 	index index.html index.htm index.php;
 	
-	expires $expires;
-	add_header Cache-Control public;
+	# Nginx 1.10 or later
+	#expires $expires;
+	#add_header Cache-Control public;
 		
 	location = /health_check {
 		stub_status     on;
