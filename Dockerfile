@@ -22,13 +22,12 @@ COPY php.conf ${php_conf}
 COPY nginx.conf ${nginx_conf}
 COPY icontent.conf ${nginx_vhost}
 COPY haproxy.cfg ${haproxy_cfg}
-
-RUN ln -s /etc/nginx/sites-available/icontent.conf /etc/nginx/sites-enabled/icontent.conf
+COPY supervisord.conf ${supervisor_conf}
 
 RUN sed -i -e 's/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/g' ${php_ini} && \
     echo "\ndaemon off;" >> ${nginx_conf}
-
-COPY supervisord.conf ${supervisor_conf}
+    
+RUN ln -s /etc/nginx/sites-available/icontent.conf /etc/nginx/sites-enabled/icontent.conf
 
 RUN mv /var/www/concrete5-${C5_VERSION}/composer.* /var/www/html/ \
 	 && mv /var/www/concrete5-${C5_VERSION}/index.php /var/www/html/ \
@@ -42,8 +41,7 @@ RUN mkdir -p /run/php && mkdir -p /run/haproxy && \
     chown -R www-data:www-data /var/www/html && \
     chown -R www-data:www-data /run/php
 
-RUN rm -rf /var/log/nginx/*
-RUN ln -sf /dev/stdout /var/log/nginx/access.log \
+RUN rm -rf /var/log/nginx/* && ln -sf /dev/stdout /var/log/nginx/access.log \
 	&& ln -sf /dev/stderr /var/log/nginx/error.log
 
 RUN echo "alias l='ls -lah --color'" >> /root/.bashrc
