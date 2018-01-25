@@ -1,7 +1,12 @@
 FROM debian:jessie-slim
 
+ENV C5_VER 5.6.3.5
+ENV C5_URL https://www.concrete5.org/download_file/-/view/96083/8497/
+
+RUN wget -q ${C5_URL} -O /var/www/concrete5.zip && unzip /var/www/concrete5.zip -d /var/www/
+
 RUN apt-get update
-RUN apt-get install -y wget unzip vim gnupg1 apt-transport-http php5 php5-fpm \
+RUN apt-get install -y wget unzip vim php5 php5-fpm \
 nginx php5-gd php-pear php5-mysql dtrx haproxy supervisor && rm -rf /var/lib/apt/lists/*
     
 ENV nginx_vhost /etc/nginx/sites-available/default
