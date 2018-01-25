@@ -20,7 +20,6 @@ ENV supervisor_conf /etc/supervisor/supervisord.conf
 COPY php.ini ${php_ini}
 COPY php.conf ${php_conf}
 COPY nginx.conf ${nginx_conf}
-COPY default.conf ${nginx_default}
 COPY icontent.conf ${nginx_vhost}
 COPY haproxy.cfg ${haproxy_cfg}
 
