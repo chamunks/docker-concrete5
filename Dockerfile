@@ -5,7 +5,8 @@ ENV C5_URL https://www.concrete5.org/download_file/-/view/96083/8497/
 
 RUN apt-get update
 RUN apt-get install -y wget unzip vim nginx php5 php5-fpm nginx \
-php5-curl php5-gd php-pear php5-mysql dtrx haproxy supervisor \
+php5-curl php5-gd php-pear php5-mysql php5-mcrypt php5-xmlrpc \
+php5-json php5-xsl dtrx haproxy supervisor \
 && rm -rf /var/lib/apt/lists/*
     
 RUN wget -q ${C5_URL} -O /var/www/concrete5.zip && unzip /var/www/concrete5.zip -d /var/www/
