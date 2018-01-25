@@ -30,7 +30,7 @@ RUN sed -i -e 's/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/g' ${php_ini} && \
 
 COPY supervisord.conf ${supervisor_conf}
 
-RUN mkdir /var/www/html &&  mv /var/www/concrete5-${C5_VERSION}/composer.* /var/www/html/ \
+RUN mv /var/www/concrete5-${C5_VERSION}/composer.* /var/www/html/ \
 	 && mv /var/www/concrete5-${C5_VERSION}/index.php /var/www/html/ \
 	 && mv /var/www/concrete5-${C5_VERSION}/concrete /var/www/html/ \
 	 && mv /var/www/concrete5-${C5_VERSION}/application /var/www/html/application-dist
