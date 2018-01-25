@@ -1,41 +1,9 @@
 FROM debian:jessie-slim
 
-ENV NGINX_VERSION 1.13.8-1~jessie
-
 RUN apt-get update
-RUN apt-get install -y wget unzip vim gnupg1 apt-transport-http php5 php5-fpm php5-gd php-pear php5-mysql dtrx haproxy supervisor
-RUN set -x \
-	&& apt-get update \
-	&& apt-get install --no-install-recommends --no-install-suggests -y gnupg1 \
-	&& \
-	NGINX_GPGKEY=573BFD6B3D8FBC641079A6ABABF5BD827BD9BF62; \
-	found=''; \
-	for server in \
-		ha.pool.sks-keyservers.net \
-		hkp://keyserver.ubuntu.com:80 \
-		hkp://p80.pool.sks-keyservers.net:80 \
-		pgp.mit.edu \
-	; do \
-		echo "Fetching GPG key $NGINX_GPGKEY from $server"; \
-		apt-key adv --keyserver "$server" --keyserver-options timeout=10 --recv-keys "$NGINX_GPGKEY" && found=yes && break; \
-	done; \
-	test -z "$found" && echo >&2 "error: failed to fetch GPG key $NGINX_GPGKEY" && exit 1; \
-	apt-get remove --purge --auto-remove -y gnupg1 && rm -rf /var/lib/apt/lists/*
-	
-RUN echo "deb http://nginx.org/packages/mainline/debian/ jessie nginx" >> /etc/apt/sources.list \
-	&& apt-get update \
-	&& apt-get install --no-install-recommends --no-install-suggests -y \
-						ca-certificates \
-						nginx=${NGINX_VERSION} \
-						nginx-module-xslt \
-						nginx-module-geoip \
-						nginx-module-image-filter \
-						nginx-module-perl \
-						nginx-module-njs \
-						gettext-base \
-	&& rm -rf /var/lib/apt/lists/*
+RUN apt-get install -y wget unzip vim gnupg1 apt-transport-http php5 php5-fpm \
+nginx php5-gd php-pear php5-mysql dtrx haproxy supervisor && rm -rf /var/lib/apt/lists/*
     
-
 ENV nginx_vhost /etc/nginx/sites-available/default
 ENV php_ini /etc/php5/fpm/php.ini
 ENV php_conf /etc/php5/fpm/pool.d/www.conf
@@ -48,11 +16,10 @@ COPY php.conf ${php_conf}
 COPY nginx.conf ${nginx_conf}
 COPY default ${nginx_vhost}
 COPY haproxy.cfg ${haproxy_cfg}
+COPY supervisord.conf ${supervisor_conf}
 
 RUN sed -i -e 's/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/g' ${php_ini} && \
     echo "\ndaemon off;" >> ${nginx_conf}
-
-COPY supervisord.conf ${supervisor_conf}
 
 RUN wget -q http://demo.i-evolve.com/packages/concrete5.6.3.5.zip -O /var/www/concrete5.zip && unzip /var/www/concrete5.zip -d /var/www/
 RUN rm -rf /var/www/concrete5.zip
