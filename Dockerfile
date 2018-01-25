@@ -26,14 +26,11 @@ COPY supervisord.conf ${supervisor_conf}
 RUN sed -i -e 's/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/g' ${php_ini} && \
     echo "\ndaemon off;" >> ${nginx_conf}
 
-RUN wget -q http://demo.i-evolve.com/packages/concrete5.6.3.5.zip -O /var/www/concrete5.zip && unzip /var/www/concrete5.zip -d /var/www/
-RUN rm -rf /var/www/concrete5.zip
-
 RUN mkdir -p /run/php && mkdir -p /run/haproxy && \
     chown -R www-data:www-data /var/www/html && \
     chown -R www-data:www-data /run/php
 
-RUN rm -rf /var/log/nginx/*
+RUN rm -rf /var/log/nginx/* /var/www/concrete5.zip
 RUN ln -sf /dev/stdout /var/log/nginx/access.log \
 	&& ln -sf /dev/stderr /var/log/nginx/error.log
 
