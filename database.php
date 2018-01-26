@@ -6,9 +6,9 @@ return array(
         'concrete' => array(
             'driver' => 'c5_pdo_mysql',
             'server' => '127.0.0.1',
-            'database' => 'c5-www-example',
-            'username' => 'www-example-user',
-            'password' => '<password>',
+            'database' => 'MYSQL_DB',
+            'username' => 'MYSQL_USER',
+            'password' => 'MYSQL_PASS',
             'charset' => 'utf8',
         ),
     ),
