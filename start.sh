@@ -3,11 +3,11 @@ rm -rf /var/www/html/index*.html > /dev/null 2>&1
 if [ ! -f /var/www/html/application/config/database.php ] ;then
     echo "Concrete5 core files missing! Copying from /var/www/html/application-dist/" > /dev/stdout
     cp -rf /var/www/html/application-dist/* /var/www/html/application/
-    sed -i "s:CMS_DOMAIN:${CMS_DOMAIN}:g" /var/www/html/application/config/concrete.php
-    sed -i "s:CMS_NAME:${CMS_NAME}:g" /var/www/html/application/config/concrete.php
-    sed -i "s:MYSQL_DB:${MYSQL_DB}:g"/var/www/html/application/config/database.php
-    sed -i "s:MYSQL_USER:${MYSQL_USER}:g"/var/www/html/application/config/database.php
-    sed -i "s:MYSQL_PASS:${MYSQL_PASS}:g"/var/www/html/application/config/database.php
+    sed -i "s:CMS_DOMAIN:$CMS_DOMAIN:g" /var/www/html/application/config/concrete.php
+    sed -i "s:CMS_NAME:$CMS_NAME:g" /var/www/html/application/config/concrete.php
+    sed -i "s:MYSQL_DB:$MYSQL_DB:g" /var/www/html/application/config/database.php
+    sed -i "s:MYSQL_USER:$MYSQL_USER:g" /var/www/html/application/config/database.php
+    sed -i "s:MYSQL_PASS:$MYSQL_PASS:g" /var/www/html/application/config/database.php
 fi
 
 unset CMS_USER
