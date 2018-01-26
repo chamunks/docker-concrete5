@@ -13,18 +13,18 @@ return array(
         'enabled' => true,
         'default' => array(
             'address' => 'no-reply@CMS_DOMAIN',
-            'name'    => ''
+            'name'    => 'CMS_NAME'
         ),
         'form_block' => array(
             'address' => false
         ),
         'forgot_password' => array(
             'address' => 'no-reply@CMS_DOMAIN',
-            'name' => null
+            'name' => 'CMS_NAME'
         ),
         'validate_registration' => array(
             'address' => null,
-            'name' => null
+            'name' => 'CMS_NAME'
         ),
     ),
     'marketplace'       => array(
