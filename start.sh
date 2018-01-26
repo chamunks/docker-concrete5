@@ -47,9 +47,9 @@ return array(
 EOF	
 fi
 
-export MYSQL_DB=""
-export MYSQL_USER=""
-export MYSQL_PASS=""
+unset MYSQL_DB
+unset MYSQL_USER
+unset MYSQL_PASS
 
 chown -R www-data:www-data /var/www/html/application
 chown -R www-data:www-data /var/www/html/packages
