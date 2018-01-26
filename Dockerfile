@@ -34,6 +34,8 @@ RUN mv /var/www/concrete5-${C5_VERSION}/composer.* /var/www/html/ \
 	 && mv /var/www/concrete5-${C5_VERSION}/concrete /var/www/html/ \
 	 && mv /var/www/concrete5-${C5_VERSION}/application /var/www/html/application-dist
 
+COPY concrete.php /var/www/html/application-dist/config/concrete.php
+
 RUN mkdir /var/www/html/packages && mkdir /var/www/html/application \
  && rm -rf /var/www/concrete5* /tmp/concrete5-${C5_VERSION}.zip 
 
