@@ -3,8 +3,12 @@ return array(
     'white_label'       => array(
         'logo'                 => false,
         'name'                 => false,
-        'dashboard_background' => null
+        'dashboard_background' => null,
+        'background_url'       => true
     ),
+    'urls' => array(
+        'background_url' => 'http://cms.i-evolve.net/bg_world_at_night.png'
+    )
     'debug'             => array(
         'display_errors' => true,
         'detail'         => 'message'
