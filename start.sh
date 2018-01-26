@@ -54,6 +54,9 @@ unset MYSQL_PASS
 unset CMS_USER
 unset CMS_PASS
 
+mkdir /var/www/sites
+ln -s /var/www/html /var/www/sites/${CMS_DOMAIN}
+
 chown -R www-data:www-data /var/www/html/application
 chown -R www-data:www-data /var/www/html/packages
 chmod 775 /var/www/html/application/files
