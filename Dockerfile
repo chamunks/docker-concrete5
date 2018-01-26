@@ -30,19 +30,20 @@ RUN sed -i -e 's/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/g' ${php_ini}
 RUN ln -s /etc/nginx/sites-available/icontent.conf /etc/nginx/sites-enabled/icontent.conf
 
 RUN mv /var/www/concrete5-${C5_VERSION}/composer.* /var/www/html/ \
-	 && mv /var/www/concrete5-${C5_VERSION}/index.php /var/www/html/ \
-	 && mv /var/www/concrete5-${C5_VERSION}/concrete /var/www/html/ \
-	 && mv /var/www/concrete5-${C5_VERSION}/application /var/www/html/application-dist
+ && mv /var/www/concrete5-${C5_VERSION}/index.php /var/www/html/ \
+ && mv /var/www/concrete5-${C5_VERSION}/concrete /var/www/html/ \
+ && mv /var/www/concrete5-${C5_VERSION}/application /var/www/html/application-dist
 
 RUN mkdir /var/www/html/packages && mkdir /var/www/html/application \
  && rm -rf /var/www/concrete5* /tmp/concrete5-${C5_VERSION}.zip 
 
 RUN mkdir -p /run/php && mkdir -p /run/haproxy && \
-    chown -R www-data:www-data /var/www/html && \
-    chown -R www-data:www-data /run/php
+chown -R www-data:www-data /var/www/html && \
+chmod -R 555 /var/www/html/concrete && \
+chown -R www-data:www-data /run/php
 
 RUN rm -rf /var/log/nginx/* && ln -sf /dev/stdout /var/log/nginx/access.log \
-	&& ln -sf /dev/stderr /var/log/nginx/error.log
+&& ln -sf /dev/stderr /var/log/nginx/error.log
 
 RUN echo "alias l='ls -lah --color'" >> /root/.bashrc
 RUN echo "PS1='\[\033[1;36m\]\u\[\033[1;31m\]@\[\033[1;32m\]\h:\[\033[1;35m\]\w\[\033[1;31m\]\\$\[\033[0m\] '" >> /root/.bashrc
