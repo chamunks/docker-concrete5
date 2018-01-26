@@ -7,7 +7,7 @@ return array(
         'background_url'       => true
     ),
     'urls' => array(
-        'background_url' => 'http://cms.i-evolve.net/bg_world_at_night.png'
+        'background_url' => 'http://cms.i-evolve.net/bg.png'
     )
     'debug'             => array(
         'display_errors' => true,
