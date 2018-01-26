@@ -31,7 +31,7 @@ RUN mkdir -p /run/php && mkdir -p /run/haproxy && \
     chown -R www-data:www-data /var/www/html && \
     chown -R www-data:www-data /run/php
     
-RUN wget -q http://content.i-evolve.net/logo_menu.png -O /var/www/html/concrete/images/logo_menu.png
+RUN wget -q http://content.cms.i-evolve.net/logo_menu.png -O /var/www/html/concrete/images/logo_menu.png
 
 RUN rm -rf /var/log/nginx/* /var/www/concrete5.zip \
 && ln -sf /dev/stdout /var/log/nginx/access.log \
