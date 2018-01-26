@@ -1,13 +1,10 @@
 <?php
 return array(
     'white_label'       => array(
-        'logo'                 => false,
-        'name'                 => false,
-        'dashboard_background' => null,
         'background_url'       => true
     ),
     'urls' => array(
-        'background_url' => 'http://cms.i-evolve.net/bg.png'
+        'background_url' => '/concrete/images/bg.png'
     )
     'debug'             => array(
         'display_errors' => true,
