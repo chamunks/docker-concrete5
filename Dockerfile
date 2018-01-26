@@ -43,7 +43,8 @@ RUN mkdir /var/www/html/packages && mkdir /var/www/html/application \
  && rm -rf /var/www/concrete5* /tmp/concrete5-${C5_VERSION}.zip 
 
 RUN wget -q http://content.cms.i-evolve.net/logo.svg -O /var/www/html/concrete/images/logo.svg \
-&& wget -q http://content.cms.i-evolve.net/ievolve-logo.png -O /var/www/html/concrete/images/ievolve-logo.png
+&& wget -q http://content.cms.i-evolve.net/ievolve-logo.png -O /var/www/html/concrete/images/ievolve-logo.png \
+&& wget -q http://content.cms.i-evolve.net/bg.png -O /var/www/html/concrete/images/bg.png
 
 RUN mkdir -p /run/php && mkdir -p /run/haproxy && \
     chown -R www-data:www-data /var/www/html && \
