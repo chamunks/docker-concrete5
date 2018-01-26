@@ -1,8 +1,33 @@
 #!/bin/sh
 rm -rf /var/www/html/index*.html > /dev/null 2>&1
 
-if [ ! -d /var/www/html/application/config ] ;then
+if [ ! -f /var/www/html/application/config/database.php ] ;then
 	cp -rf /var/www/html/application-dist/* /var/www/html/application/
+	cat << EOF > /var/www/html/application/config/concrete.php
+<?php
+return array(
+    'marketplace' => array(
+        'enabled' => false,
+        'intelligent_search' => false,
+    ),
+    'external' => array(
+        'intelligent_search_help' => true,
+        'news_overlay' => false,
+        'news' => false,
+    ),
+    'email' => array(
+        'default' => array(
+            'address' => 'no-reply@${CMS_DOMAIN}',
+            'name' => '${CMS_NAME}',
+        ),
+        // Forgot password messages
+        'forgot_password' => array(
+            'address' => 'no-reply@${CMS_DOMAIN}',
+            'name' => '${CMS_NAME}',
+        ),
+    ),
+);
+EOF
 fi
 
 chown -R www-data:www-data /var/www/html/application
