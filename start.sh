@@ -50,6 +50,8 @@ fi
 unset MYSQL_DB
 unset MYSQL_USER
 unset MYSQL_PASS
+unset CMS_USER
+unset CMS_PASS
 
 chown -R www-data:www-data /var/www/html/application
 chown -R www-data:www-data /var/www/html/packages
