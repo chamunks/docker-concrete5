@@ -28,7 +28,28 @@ return array(
     ),
 );
 EOF
+
+	cat << EOF > /var/www/html/application/config/database.php
+<?php
+return array(
+    'default-connection' => 'concrete',
+    'connections' => array(
+        'concrete' => array(
+            'driver' => 'c5_pdo_mysql',
+            'server' => '127.0.0.1',
+            'database' => '${MYSQL_DB}',
+            'username' => '${MYSQL_USER}',
+            'password' => '${MYSQL_PASS}',
+            'charset' => 'utf8',
+        ),
+    ),
+);	
+EOF	
 fi
+
+export MYSQL_DB=""
+export MYSQL_USER=""
+export MYSQL_PASS=""
 
 chown -R www-data:www-data /var/www/html/application
 chown -R www-data:www-data /var/www/html/packages
