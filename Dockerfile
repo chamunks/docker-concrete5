@@ -34,6 +34,7 @@ RUN mv /var/www/concrete5-${C5_VERSION}/composer.* /var/www/html/ \
 	 && mv /var/www/concrete5-${C5_VERSION}/concrete /var/www/html/ \
 	 && mv /var/www/concrete5-${C5_VERSION}/application /var/www/html/application-dist
 
+COPY database.php /var/www/html/application-dist/config/database.php
 COPY concrete.php /var/www/html/application-dist/config/concrete.php
 COPY app.php /var/www/html/application-dist/config/app.php
 
