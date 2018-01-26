@@ -1,57 +1,19 @@
 #!/bin/sh
 rm -rf /var/www/html/index*.html > /dev/null 2>&1
 if [ ! -f /var/www/html/application/config/database.php ] ;then
-cp -rf /var/www/html/application-dist/* /var/www/html/application/
-cat <<EOF > /var/www/html/application/config/concrete.php
-<?php
-return array(
-    'marketplace' => array(
-        'enabled' => false,
-        'intelligent_search' => false,
-    ),
-    'external' => array(
-        'intelligent_search_help' => true,
-        'news_overlay' => false,
-        'news' => false,
-    ),
-    'email' => array(
-        'default' => array(
-            'address' => 'no-reply@${CMS_DOMAIN}',
-            'name' => '${CMS_NAME}',
-        ),
-        // Forgot password messages
-        'forgot_password' => array(
-            'address' => 'no-reply@${CMS_DOMAIN}',
-            'name' => '${CMS_NAME}',
-        ),
-    ),
-);
-EOF
-
-cat <<EOF1 > /var/www/html/application/config/database.php
-<?php
-return array(
-    'default-connection' => 'concrete',
-    'connections' => array(
-        'concrete' => array(
-            'driver' => 'c5_pdo_mysql',
-            'server' => '127.0.0.1',
-            'database' => '${MYSQL_DB}',
-            'username' => '${MYSQL_USER}',
-            'password' => '${MYSQL_PASS}',
-            'charset' => 'utf8',
-        ),
-    ),
-);	
-EOF1	
-
+    cp -rf /var/www/html/application-dist/* /var/www/html/application/
+    sed -i 's:CMS_DOMAIN:${CMS_DOMAIN}:g' /var/www/html/application/config/concrete.php
+    sed -i 's:CMS_NAME:${CMS_NAME}:g' /var/www/html/application/config/concrete.php
+    sed -i 's:MYSQL_DB:${MYSQL_DB}:g'/var/www/html/application/config/database.php
+    sed -i 's:MYSQL_USER:${MYSQL_USER}:g'/var/www/html/application/config/database.php
+    sed -i 's:MYSQL_PASS:${MYSQL_PASS}:g'/var/www/html/application/config/database.php
 fi
 
+unset CMS_USER
+unset CMS_PASS
 unset MYSQL_DB
 unset MYSQL_USER
 unset MYSQL_PASS
-unset CMS_USER
-unset CMS_PASS
 
 mkdir /var/www/sites
 ln -s /var/www/html /var/www/sites/${CMS_DOMAIN}
