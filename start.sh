@@ -3,7 +3,7 @@ rm -rf /var/www/html/index*.html > /dev/null 2>&1
 
 if [ ! -f /var/www/html/application/config/database.php ] ;then
 cp -rf /var/www/html/application-dist/* /var/www/html/application/
-cat > /var/www/html/application/config/concrete.php << EOF 
+cat <<EOF > /var/www/html/application/config/concrete.php
 <?php
 return array(
     'marketplace' => array(
@@ -29,7 +29,7 @@ return array(
 );
 EOF
 
-cat > /var/www/html/application/config/database.php << EOF 
+cat << EOF > /var/www/html/application/config/database.php
 <?php
 return array(
     'default-connection' => 'concrete',
