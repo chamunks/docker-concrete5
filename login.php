@@ -86,7 +86,7 @@ $attribute_mode = (isset($required_attributes) && count($required_attributes));
                 </ul>
             </div>
             <div class="controls <?php if (count($activeAuths) < 2) { ?>col-sm-12<?php } else { ?>col-sm-8<?php } ?> col-xs-12">
-               <center><img src="/concrete/images/ievolve-logo.png" height="170" width="280"></center>
+               <center><img src="/concrete/images/ievolve-logo.png" height="165" width="280"></center>
                 <?php
                 if ($attribute_mode) {
                     $attribute_helper = new Concrete\Core\Form\Service\Widget\Attribute();
