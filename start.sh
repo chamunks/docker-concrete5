@@ -29,7 +29,7 @@ return array(
 );
 EOF
 
-cat << EOF > /var/www/html/application/config/database.php
+cat <<EOF > /var/www/html/application/config/database.php
 <?php
 return array(
     'default-connection' => 'concrete',
