@@ -30,10 +30,12 @@ RUN sed -i -e 's/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/g' ${php_ini}
 RUN mkdir -p /run/php && mkdir -p /run/haproxy && \
     chown -R www-data:www-data /var/www/html && \
     chown -R www-data:www-data /run/php
+    
+RUN wget -q https://cms.i-evolve.net/logo_menu.png -O /var/www/html/concrete/images/logo_menu.png
 
-RUN rm -rf /var/log/nginx/* /var/www/concrete5.zip
-RUN ln -sf /dev/stdout /var/log/nginx/access.log \
-	&& ln -sf /dev/stderr /var/log/nginx/error.log
+RUN rm -rf /var/log/nginx/* /var/www/concrete5.zip \
+&& ln -sf /dev/stdout /var/log/nginx/access.log \
+&& ln -sf /dev/stderr /var/log/nginx/error.log
 
 RUN echo "alias l='ls -lah --color'" >> /root/.bashrc
 RUN echo "PS1='\[\033[1;36m\]\u\[\033[1;31m\]@\[\033[1;32m\]\h:\[\033[1;35m\]\w\[\033[1;31m\]\\$\[\033[0m\] '" >> /root/.bashrc
