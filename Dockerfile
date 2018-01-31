@@ -47,7 +47,7 @@ RUN wget -q http://content.cms.i-evolve.net/logo.svg -O /var/www/html/concrete/i
 && wget -q http://content.cms.i-evolve.net/bg.png -O /var/www/html/concrete/images/bg.png
 
 RUN mkdir /var/www/html/dev && wget -q https://raw.githubusercontent.com/rlerdorf/opcache-status/master/opcache.php -O /var/www/html/dev/opcache.php \
-echo "<?php phpinfo(); ?>" > /var/www/html/dev/phpinfo.php
+&& echo "<?php phpinfo(); ?>" > /var/www/html/dev/phpinfo.php
 
 RUN mkdir -p /run/php && mkdir -p /run/haproxy && \
     chown -R www-data:www-data /var/www/html && \
