@@ -1,5 +1,4 @@
 #!/bin/sh
-rm -rf /var/www/html/index*.html > /dev/null 2>&1
 if [ ! -f /var/www/html/application/config/database.php ] ;then
     echo "Concrete5 core files missing! Copying from /var/www/html/application-dist/" > /dev/stdout
     cp -rf /var/www/html/application-dist/* /var/www/html/application/
@@ -16,15 +15,14 @@ unset MYSQL_DB
 unset MYSQL_USER
 unset MYSQL_PASS
 
-mkdir /var/www/sites
-ln -s /var/www/html /var/www/sites/${CMS_DOMAIN}
-
 chown -R www-data:www-data /var/www/html/application
-chown -R www-data:www-data /var/www/html/packages
+#chown -R www-data:www-data /var/www/html/packages
 chmod 775 /var/www/html/application/files
 
+mkdir /var/www/sites 2> /dev/null || rm -rf /var/www/sites/*
+ln -s /var/www/html /var/www/sites/${CMS_DOMAIN} > /dev/null 2>&1
 mkdir /var/www/html/updates 2> /dev/null || rm -rf /var/www/html/updates/*
 ln -s /var/www/html /var/www/html/updates/concrete5-8.3.1
+rm -rf /var/www/html/index*.html > /dev/null 2>&1
 
 /usr/bin/supervisord -n -c /etc/supervisor/supervisord.conf
-
