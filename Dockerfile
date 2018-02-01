@@ -13,12 +13,14 @@ RUN rm -rf /var/lib/apt/lists/* /etc/nginx/sites-enabled/*
 
 ENV nginx_vhost /etc/nginx/sites-available/icontent.conf
 ENV php_ini /etc/php/7.0/fpm/php.ini
+ENV php_fpm /etc/php/7.0/fpm/php-fpm.conf
 ENV php_conf /etc/php/7.0/fpm/pool.d/www.conf
 ENV nginx_conf /etc/nginx/nginx.conf
 ENV haproxy_cfg /etc/haproxy/haproxy.cfg
 ENV supervisor_conf /etc/supervisor/supervisord.conf
 
 COPY php.ini ${php_ini}
+COPY php-fpm.conf ${php_fpm}
 COPY php.conf ${php_conf}
 COPY nginx.conf ${nginx_conf}
 COPY icontent.conf ${nginx_vhost}
