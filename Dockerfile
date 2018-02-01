@@ -20,7 +20,7 @@ ENV haproxy_cfg /etc/haproxy/haproxy.cfg
 ENV supervisor_conf /etc/supervisor/supervisord.conf
 
 COPY php.ini ${php_ini}
-COPY php-fpm.conf ${php_fpm}
+#COPY php-fpm.conf ${php_fpm}
 COPY php.conf ${php_conf}
 COPY nginx.conf ${nginx_conf}
 COPY icontent.conf ${nginx_vhost}
