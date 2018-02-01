@@ -1,4 +1,5 @@
 #!/bin/sh
+echo "Running start.sh...." > /dev/stdout
 if [ ! -f /var/www/html/application/config/database.php ] ;then
     echo "Concrete5 core files missing! Copying from /var/www/html/application-dist/" > /dev/stdout
     cp -rf /var/www/html/application-dist/* /var/www/html/application/
@@ -8,13 +9,13 @@ if [ ! -f /var/www/html/application/config/database.php ] ;then
     sed -i "s:MYSQL_USER:$MYSQL_USER:g" /var/www/html/application/config/database.php
     sed -i "s:MYSQL_PASS:$MYSQL_PASS:g" /var/www/html/application/config/database.php
 fi
-
 unset CMS_USER
 unset CMS_PASS
 unset MYSQL_DB
 unset MYSQL_USER
 unset MYSQL_PASS
 
+echo "Setting file owner to www-data" > /dev/stdout
 chown -R www-data:www-data /var/www/html/application
 #chown -R www-data:www-data /var/www/html/packages
 chmod 775 /var/www/html/application/files
