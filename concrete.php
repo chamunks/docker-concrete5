@@ -1,16 +1,16 @@
 <?php
 return array(
-    'white_label'       => array(
-        'background_url'       => true
+    'white_label' => array(
+        'background_url' => true
     ),
     'urls' => array(
         'background_url' => '/concrete/images/bg.png'
-    )
-    'debug'             => array(
-        'display_errors' => true,
-        'detail'         => 'message'
     ),
-    'email'             => array(
+    'debug' => array(
+        'display_errors' => true,
+        'detail' => 'message'
+    ),
+    'email' => array(
         'enabled' => true,
         'default' => array(
             'address' => 'no-reply@CMS_DOMAIN',
@@ -28,12 +28,12 @@ return array(
             'name' => 'CMS_NAME'
         ),
     ),
-    'marketplace'       => array(
-        'enabled'            => false,
+    'marketplace' => array(
+        'enabled' => false,
         'intelligent_search' => false,
         'log_requests' => false
     ),
-    'external'              => array(
+    'external' => array(
         'intelligent_search_help' => false,
         'news_overlay'            => false,
         'news'                    => false,
