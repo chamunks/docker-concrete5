@@ -8,6 +8,8 @@ if [ ! -f /var/www/html/application/config/database.php ] ;then
     sed -i "s:MYSQL_DB:$MYSQL_DB:g" /var/www/html/application/config/database.php
     sed -i "s:MYSQL_USER:$MYSQL_USER:g" /var/www/html/application/config/database.php
     sed -i "s:MYSQL_PASS:$MYSQL_PASS:g" /var/www/html/application/config/database.php
+    mv /var/www/html/application/config/concrete.php /var/www/html/application/config/concrete.php-rancher
+    mv /var/www/html/application/config/database.php /var/www/html/application/config/database.php-rancher
 fi
 unset CMS_USER
 unset CMS_PASS
