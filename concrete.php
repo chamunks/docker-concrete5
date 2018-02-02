@@ -1,5 +1,8 @@
 <?php
 return array(
+    'session' => array(
+        'handler' => 'database'
+    ),
     'white_label' => array(
         'background_url' => true
     ),
