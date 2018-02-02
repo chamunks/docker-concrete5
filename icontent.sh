@@ -1,5 +1,5 @@
 #!/bin/sh
-echo "Running start.sh...." > /dev/stdout
+echo "Running icontent.sh...." > /dev/stdout
 if [ ! -f /var/www/html/application/config/database.php ] ;then
     echo "Concrete5 core files missing! Copying from /var/www/html/application-dist/" > /dev/stdout
     cp -rf /var/www/html/application-dist/* /var/www/html/application/
