@@ -64,7 +64,7 @@ RUN printf "set pastetoggle=<F2>\nset clipboard=unnamed\nlet b:did_indent = 1\n"
 
 VOLUME ["/var/www/html/packages", "/var/www/html/application"]
 
-COPY start.sh /start.sh
-RUN ["chmod", "+x", "/start.sh"]
-CMD ["./start.sh"]
+COPY icontent.sh /icontent.sh
+RUN ["chmod", "+x", "/icontent.sh"]
+CMD ["./icontent.sh"]
 
