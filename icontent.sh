@@ -1,4 +1,5 @@
 #!/bin/sh
+CMS_VER=8.3.1
 echo "Running icontent.sh...." > /dev/stdout
 if [ ! -f /var/www/html/application/config/database.php ] ;then
     echo "Concrete5 core files missing! Copying from /var/www/html/application-dist/" > /dev/stdout
@@ -18,6 +19,13 @@ if [ ! -f /var/www/html/application/config/database.php ] ;then
     --db-database=${MYSQL_DB} --site="${CMS_NAME}" --starting-point=${SAMPLE_DATA} --admin-email=${CMS_USER} \
     --admin-password="${CMS_PASS}" --site-locale="${CONCRETE5_LOCALE}" > /dev/stdout
 else 
+    CMS_INSTALLED=$(/var/www/html/concrete/bin/concrete5 c5:info|grep 'Core Version'|sed -e 's/^.*-\s//')
+    echo "Concrete5 is installed! Version [${CMS_INSTALLED}]"
+    if [ "$CMS_VER" != "$CMS_INSTALLED" ];then
+        chown -R www-data:www-data /var/www/html/application
+        /var/www/html/concrete/bin/concrete5 c5:update > /dev/stdout
+        /var/www/html/concrete/bin/concrete5 c5:clear-cache > /dev/stdout
+    fi
     mkdir /var/www/sites 2> /dev/null || rm -rf /var/www/sites/*
     ln -s /var/www/html /var/www/sites/${CMS_DOMAIN} > /dev/null 2>&1
     mkdir /var/www/html/updates 2> /dev/null || rm -rf /var/www/html/updates/*
@@ -30,8 +38,8 @@ unset MYSQL_DB
 unset MYSQL_USER
 unset MYSQL_PASS
 
-echo "Setting file owner to www-data" > /dev/stdout
-chown -R www-data:www-data /var/www/html/application
+#echo "Setting file owner to www-data" > /dev/stdout
+#chown -R www-data:www-data /var/www/html/application
 #chown -R www-data:www-data /var/www/html/packages
 chmod 775 /var/www/html/application/files
 rm -rf /var/www/html/index*.html > /dev/null 2>&1
