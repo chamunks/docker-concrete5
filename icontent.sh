@@ -9,7 +9,21 @@ if [ ! -f /var/www/html/application/config/database.php ] ;then
     sed -i "s:MYSQL_USER:$MYSQL_USER:g" /var/www/html/application/config/database.php
     sed -i "s:MYSQL_PASS:$MYSQL_PASS:g" /var/www/html/application/config/database.php
     mv /var/www/html/application/config/database.php /var/www/html/application/config/database.php-rancher
+    chmod 755 /var/www/html/concrete/bin/concrete5
+    MYSQL_SERVER="127.0.0.1"
+    CONCRETE5_LOCALE="en_US"
+    SAMPLE_DATA="elemental_full"
+    echo "Running Concrete5 install script" > /dev/stdout
+    concrete/bin/concrete5 c5:install --db-server=${MYSQL_SERVER} --db-username=${MYSQL_USER} --db-password=${MYSQL_PASS} \
+    --db-database=${MYSQL_DB} --site="${CMS_NAME}" --starting-point=${SAMPLE_DATA} --admin-email=${CMS_USER} \
+    --admin-password="${CMS_PASS}" --site-locale="${CONCRETE5_LOCALE}" > /dev/stdout
+else 
+    mkdir /var/www/sites 2> /dev/null || rm -rf /var/www/sites/*
+    ln -s /var/www/html /var/www/sites/${CMS_DOMAIN} > /dev/null 2>&1
+    mkdir /var/www/html/updates 2> /dev/null || rm -rf /var/www/html/updates/*
+    ln -s /var/www/html /var/www/html/updates/concrete5-8.3.1
 fi
+
 unset CMS_USER
 unset CMS_PASS
 unset MYSQL_DB
@@ -20,11 +34,5 @@ echo "Setting file owner to www-data" > /dev/stdout
 chown -R www-data:www-data /var/www/html/application
 #chown -R www-data:www-data /var/www/html/packages
 chmod 775 /var/www/html/application/files
-
-mkdir /var/www/sites 2> /dev/null || rm -rf /var/www/sites/*
-ln -s /var/www/html /var/www/sites/${CMS_DOMAIN} > /dev/null 2>&1
-mkdir /var/www/html/updates 2> /dev/null || rm -rf /var/www/html/updates/*
-ln -s /var/www/html /var/www/html/updates/concrete5-8.3.1
 rm -rf /var/www/html/index*.html > /dev/null 2>&1
-
 /usr/bin/supervisord -n -c /etc/supervisor/supervisord.conf
