@@ -22,6 +22,7 @@ else
     CMS_INSTALLED=$(/var/www/html/concrete/bin/concrete5 c5:info|grep 'Core Version'|sed -e 's/^.*-\s//')
     echo "Concrete5 is installed! Version [${CMS_INSTALLED}]"
     if [ "$CMS_VER" != "$CMS_INSTALLED" ];then
+        echo "Upgrading C5 from ${CMS_INSTALLED} to ${CMS_VER}... " > /dev/stdout
         chown -R www-data:www-data /var/www/html/application
         /var/www/html/concrete/bin/concrete5 c5:update > /dev/stdout
         /var/www/html/concrete/bin/concrete5 c5:clear-cache > /dev/stdout
