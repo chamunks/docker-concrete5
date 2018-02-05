@@ -25,12 +25,12 @@ else
         echo "Upgrading C5 from ${CMS_INSTALLED} to ${CMS_VER}... " > /dev/stdout
         chown -R www-data:www-data /var/www/html/application
         /var/www/html/concrete/bin/concrete5 c5:update > /dev/stdout
-        /var/www/html/concrete/bin/concrete5 c5:clear-cache > /dev/stdout
     fi
     mkdir /var/www/sites 2> /dev/null || rm -rf /var/www/sites/*
     ln -s /var/www/html /var/www/sites/${CMS_DOMAIN} > /dev/null 2>&1
     mkdir /var/www/html/updates 2> /dev/null || rm -rf /var/www/html/updates/*
     ln -s /var/www/html /var/www/html/updates/concrete5-8.3.1
+    /var/www/html/concrete/bin/concrete5 c5:clear-cache > /dev/stdout
 fi
 
 unset CMS_USER
