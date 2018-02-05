@@ -1,5 +1,5 @@
 #!/bin/sh
-CMS_VER=8.3.1
+CMS_VER="8.3.1"
 echo "Running icontent.sh...." > /dev/stdout
 if [ ! -f /var/www/html/application/config/database.php ] ;then
     MYSQL_SERVER="10.0.13.121"
@@ -31,7 +31,7 @@ else
     mkdir /var/www/sites 2> /dev/null || rm -rf /var/www/sites/*
     ln -s /var/www/html /var/www/sites/${CMS_DOMAIN} > /dev/null 2>&1
     mkdir /var/www/html/updates 2> /dev/null || rm -rf /var/www/html/updates/*
-    ln -s /var/www/html /var/www/html/updates/concrete5-8.3.1
+    ln -s /var/www/html /var/www/html/updates/concrete5-${CMS_VER}
     /var/www/html/concrete/bin/concrete5 c5:clear-cache > /dev/stdout
     chown -R www-data:www-data /var/www/html/application/files/
 fi
