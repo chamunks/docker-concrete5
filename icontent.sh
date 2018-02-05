@@ -24,7 +24,7 @@ else
     if [ "$CMS_VER" != "$CMS_INSTALLED" ];then
         echo "Upgrading C5 from ${CMS_INSTALLED} to ${CMS_VER}... " > /dev/stdout
         chown -R www-data:www-data /var/www/html/application
-        /var/www/html/concrete/bin/concrete5 c5:update > /dev/stdout
+        /var/www/html/concrete/bin/concrete5 -f c5:update > /dev/stdout
     fi
     mkdir /var/www/sites 2> /dev/null || rm -rf /var/www/sites/*
     ln -s /var/www/html /var/www/sites/${CMS_DOMAIN} > /dev/null 2>&1
