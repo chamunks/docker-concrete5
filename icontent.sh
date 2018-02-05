@@ -1,6 +1,7 @@
 #!/bin/sh
 CMS_VER="8.3.1"
 echo "Running icontent.sh...." > /dev/stdout
+/usr/sbin/haproxy -f /etc/haproxy/haproxy.cfg
 if [ ! -f /var/www/html/application/config/database.php ] ;then
     MYSQL_SERVER="10.0.13.121"
     CONCRETE5_LOCALE="en_US"
@@ -36,7 +37,7 @@ else
     /var/www/html/concrete/bin/concrete5 c5:clear-cache > /dev/stdout
     chown -R www-data:www-data /var/www/html/application/files/
 fi
-
+killall -9 haproxy
 unset CMS_USER
 unset CMS_PASS
 unset MYSQL_DB
