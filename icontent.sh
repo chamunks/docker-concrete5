@@ -18,6 +18,8 @@ if [ ! -f /var/www/html/application/config/database.php ] ;then
     /var/www/html/concrete/bin/concrete5 c5:install --db-server=${MYSQL_SERVER} --db-username=${MYSQL_USER} --db-password=${MYSQL_PASS} \
     --db-database=${MYSQL_DB} --site="${CMS_NAME}" --starting-point=${SAMPLE_DATA} --admin-email=${CMS_USER} \
     --admin-password="${CMS_PASS}" --site-locale="${CONCRETE5_LOCALE}" > /dev/stdout
+    chown -R www-data:www-data /var/www/html/application
+    chown -R www-data:www-data /var/www/html/packages
 else 
     CMS_INSTALLED=$(/var/www/html/concrete/bin/concrete5 c5:info|grep 'Core Version'|sed -e 's/^.*-\s//')
     echo "Concrete5 is installed! Version [${CMS_INSTALLED}]"
