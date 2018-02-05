@@ -31,6 +31,7 @@ else
     mkdir /var/www/html/updates 2> /dev/null || rm -rf /var/www/html/updates/*
     ln -s /var/www/html /var/www/html/updates/concrete5-8.3.1
     /var/www/html/concrete/bin/concrete5 c5:clear-cache > /dev/stdout
+    chown -R www-data:www-data /var/www/html/application/files/
 fi
 
 unset CMS_USER
@@ -39,9 +40,6 @@ unset MYSQL_DB
 unset MYSQL_USER
 unset MYSQL_PASS
 
-#echo "Setting file owner to www-data" > /dev/stdout
-#chown -R www-data:www-data /var/www/html/application
-#chown -R www-data:www-data /var/www/html/packages
 chmod 775 /var/www/html/application/files
 rm -rf /var/www/html/index*.html > /dev/null 2>&1
 echo "Starting supervisord" > /dev/stdout
