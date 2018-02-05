@@ -37,7 +37,7 @@ else
     /var/www/html/concrete/bin/concrete5 c5:clear-cache > /dev/stdout
     chown -R www-data:www-data /var/www/html/application/files/
 fi
-killall -9 haproxy
+
 unset CMS_USER
 unset CMS_PASS
 unset MYSQL_DB
@@ -46,5 +46,6 @@ unset MYSQL_PASS
 
 chmod 775 /var/www/html/application/files
 rm -rf /var/www/html/index*.html > /dev/null 2>&1
+killall -9 haproxy
 echo "Starting supervisord" > /dev/stdout
 /usr/bin/supervisord -n -c /etc/supervisor/supervisord.conf
