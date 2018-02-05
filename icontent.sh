@@ -2,7 +2,7 @@
 CMS_VER=8.3.1
 echo "Running icontent.sh...." > /dev/stdout
 if [ ! -f /var/www/html/application/config/database.php ] ;then
-    MYSQL_SERVER="127.0.0.1"
+    MYSQL_SERVER="10.0.13.121"
     CONCRETE5_LOCALE="en_US"
     SAMPLE_DATA="elemental_blank"
     echo "Concrete5 core files missing! Copying from /var/www/html/application-dist/" > /dev/stdout
