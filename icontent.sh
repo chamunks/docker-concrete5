@@ -2,6 +2,9 @@
 CMS_VER=8.3.1
 echo "Running icontent.sh...." > /dev/stdout
 if [ ! -f /var/www/html/application/config/database.php ] ;then
+    MYSQL_SERVER="127.0.0.1"
+    CONCRETE5_LOCALE="en_US"
+    SAMPLE_DATA="elemental_blank"
     echo "Concrete5 core files missing! Copying from /var/www/html/application-dist/" > /dev/stdout
     cp -rf /var/www/html/application-dist/* /var/www/html/application/
     sed -i "s:CMS_DOMAIN:$CMS_DOMAIN:g" /var/www/html/application/config/concrete.php
@@ -11,9 +14,6 @@ if [ ! -f /var/www/html/application/config/database.php ] ;then
     sed -i "s:MYSQL_PASS:$MYSQL_PASS:g" /var/www/html/application/config/database.php
     mv /var/www/html/application/config/database.php /var/www/html/application/config/database.php-rancher
     chmod 755 /var/www/html/concrete/bin/concrete5
-    MYSQL_SERVER="127.0.0.1"
-    CONCRETE5_LOCALE="en_US"
-    SAMPLE_DATA="elemental_blank"
     echo "Running Concrete5 install script" > /dev/stdout
     /var/www/html/concrete/bin/concrete5 c5:install --db-server=${MYSQL_SERVER} --db-username=${MYSQL_USER} --db-password=${MYSQL_PASS} \
     --db-database=${MYSQL_DB} --site="${CMS_NAME}" --starting-point=${SAMPLE_DATA} --admin-email=${CMS_USER} \
@@ -44,4 +44,5 @@ unset MYSQL_PASS
 #chown -R www-data:www-data /var/www/html/packages
 chmod 775 /var/www/html/application/files
 rm -rf /var/www/html/index*.html > /dev/null 2>&1
+echo "Starting supervisord" > /dev/stdout
 /usr/bin/supervisord -n -c /etc/supervisor/supervisord.conf
