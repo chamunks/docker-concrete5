@@ -19,6 +19,7 @@ ENV nginx_conf /etc/nginx/nginx.conf
 ENV haproxy_cfg /etc/haproxy/haproxy.cfg
 ENV supervisor_conf /etc/supervisor/supervisord.conf
 
+COPY php.ini /etc/php/7.0/cli/php.ini
 COPY php.ini ${php_ini}
 COPY php-fpm.conf ${php_fpm}
 COPY php.conf ${php_conf}
