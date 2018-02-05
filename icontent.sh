@@ -14,7 +14,7 @@ if [ ! -f /var/www/html/application/config/database.php ] ;then
     CONCRETE5_LOCALE="en_US"
     SAMPLE_DATA="elemental_blank"
     echo "Running Concrete5 install script" > /dev/stdout
-    concrete/bin/concrete5 c5:install --db-server=${MYSQL_SERVER} --db-username=${MYSQL_USER} --db-password=${MYSQL_PASS} \
+    /var/www/html/concrete/bin/concrete5 c5:install --db-server=${MYSQL_SERVER} --db-username=${MYSQL_USER} --db-password=${MYSQL_PASS} \
     --db-database=${MYSQL_DB} --site="${CMS_NAME}" --starting-point=${SAMPLE_DATA} --admin-email=${CMS_USER} \
     --admin-password="${CMS_PASS}" --site-locale="${CONCRETE5_LOCALE}" > /dev/stdout
 else 
