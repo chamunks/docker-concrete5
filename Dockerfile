@@ -1,14 +1,13 @@
 FROM debian:stretch-slim
-
+ENV TZ=America/New_York
 ENV C5_VERSION 8.3.1
 ENV C5_URL https://www.concrete5.org/download_file/-/view/99963/8497/
 
 RUN apt-get update
-RUN apt-get install -y wget unzip vim nginx php7.0-fpm php7.0-mysql php7.0-gd php7.0-mcrypt \
+RUN apt-get install -y tzdata wget unzip vim nginx php7.0-fpm php7.0-mysql php7.0-gd php7.0-mcrypt \
     php7.0-xml php7.0-mbstring php7.0-zip geoip-database ca-certificates haproxy supervisor 
-
-RUN wget -q ${C5_URL} -O /tmp/concrete5-${C5_VERSION}.zip && unzip /tmp/concrete5-${C5_VERSION}.zip -d /var/www/
-	
+RUN rm /etc/localtime && ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+RUN wget -q ${C5_URL} -O /tmp/concrete5-${C5_VERSION}.zip && unzip /tmp/concrete5-${C5_VERSION}.zip -d /var/www/	
 RUN rm -rf /var/lib/apt/lists/* /etc/nginx/sites-enabled/* 
 
 ENV nginx_vhost /etc/nginx/sites-available/icontent.conf
