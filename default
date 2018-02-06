@@ -36,16 +36,7 @@ server {
 	}
 
 	location ~\.php($|/) {
-		fastcgi_buffers                 16 256k;
-		fastcgi_buffer_size             256k;
-		fastcgi_connect_timeout         2s;
-		fastcgi_send_timeout            12s;
-		fastcgi_read_timeout            360s;
-		fastcgi_busy_buffers_size       256k;
-		fastcgi_temp_file_write_size    256k;
-		fastcgi_ignore_headers          Cache-Control Expires Set-Cookie;
 		fastcgi_split_path_info 	^(.+\.php)(/.+)$;
-		fastcgi_index 			index.php;
 		include snippets/fastcgi-php.conf;
 		fastcgi_pass unix:/run/php/php5.6-fpm.sock;
 	}
