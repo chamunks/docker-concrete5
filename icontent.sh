@@ -10,9 +10,9 @@ if [ ! -f /var/www/html/application/config/database.php ] ;then
     cp -rf /var/www/html/application-dist/* /var/www/html/application/
     sed -i "s:CMS_DOMAIN:$CMS_DOMAIN:g" /var/www/html/application/config/concrete.php
     sed -i "s:CMS_NAME:$CMS_NAME:g" /var/www/html/application/config/concrete.php
-    sed -i "s:MYSQL_DB:$MYSQL_DB:g" /var/www/html/application/config/database.php
-    sed -i "s:MYSQL_USER:$MYSQL_USER:g" /var/www/html/application/config/database.php
-    sed -i "s:MYSQL_PASS:$MYSQL_PASS:g" /var/www/html/application/config/database.php
+    #sed -i "s:MYSQL_DB:$MYSQL_DB:g" /var/www/html/application/config/database.php
+    #sed -i "s:MYSQL_USER:$MYSQL_USER:g" /var/www/html/application/config/database.php
+    #sed -i "s:MYSQL_PASS:$MYSQL_PASS:g" /var/www/html/application/config/database.php
     mv /var/www/html/application/config/database.php /var/www/html/application/config/database.php-rancher
     chmod 755 /var/www/html/concrete/bin/concrete5
     echo "Running Concrete5 install script" > /dev/stdout
@@ -30,8 +30,8 @@ else
         /var/www/html/concrete/bin/concrete5 -f c5:update 
         chown -R www-data:www-data /var/www/html/application
     fi
-    mkdir /var/www/sites 2> /dev/null || rm -rf /var/www/sites/*
-    ln -s /var/www/html /var/www/sites/${CMS_DOMAIN} > /dev/null 2>&1
+    #mkdir /var/www/sites 2> /dev/null || rm -rf /var/www/sites/*
+    #ln -s /var/www/html /var/www/sites/${CMS_DOMAIN} > /dev/null 2>&1
     mkdir /var/www/html/updates 2> /dev/null || rm -rf /var/www/html/updates/*
     #ln -s /var/www/html /var/www/html/updates/concrete5-${CMS_VER}
     /var/www/html/concrete/bin/concrete5 c5:clear-cache > /dev/stdout
