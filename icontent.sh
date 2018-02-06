@@ -28,16 +28,15 @@ else
         echo "Upgrading C5 from ${CMS_INSTALLED} to ${CMS_VER}... " > /dev/stdout
         chown -R www-data:www-data /var/www/html/application
         /var/www/html/concrete/bin/concrete5 -f c5:update 
-        chmod 775 /var/www/html/application/files/cache
-        chown www-data:www-data /var/www/html/application/files/cache
         chown -R www-data:www-data /var/www/html/application
     fi
-    #mkdir /var/www/sites 2> /dev/null || rm -rf /var/www/sites/*
-    #ln -s /var/www/html /var/www/sites/${CMS_DOMAIN} > /dev/null 2>&1
     mkdir /var/www/html/updates 2> /dev/null || rm -rf /var/www/html/updates/*
-    #ln -s /var/www/html /var/www/html/updates/concrete5-${CMS_VER}
     rm -rf /var/www/html/application/config/update.php > /dev/null 2>&1
-    /var/www/html/concrete/bin/concrete5 c5:clear-cache > /dev/stdout
+    if test "`find /var/www/html/application/files/cache -type d -mmin +30`";then
+        /var/www/html/concrete/bin/concrete5 c5:clear-cache 
+    fi
+    chmod 775 /var/www/html/application/files/cache
+    chown www-data:www-data /var/www/html/application/files/cache
     chown -R www-data:www-data /var/www/html/application/files/
 fi
 
