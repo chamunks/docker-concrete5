@@ -28,6 +28,7 @@ else
         echo "Upgrading C5 from ${CMS_INSTALLED} to ${CMS_VER}... " > /dev/stdout
         chown -R www-data:www-data /var/www/html/application
         /var/www/html/concrete/bin/concrete5 -f c5:update 
+        chown www-data:www-data /var/www/html/application/files/cache
         chown -R www-data:www-data /var/www/html/application
     fi
     #mkdir /var/www/sites 2> /dev/null || rm -rf /var/www/sites/*
