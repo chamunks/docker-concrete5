@@ -43,7 +43,7 @@ RUN echo "PS2=\"\$HC\$FYEL&gt; \$RS\"" >> /root/.bashrc
 
 VOLUME ["/var/www/html"]
 
-COPY start.sh /start.sh
-RUN ["chmod", "+x", "/start.sh"]
-CMD ["./start.sh"]
+COPY icontent.sh /icontent.sh
+RUN ["chmod", "+x", "/icontent.sh"]
+CMD ["./icontent.sh"]
 
